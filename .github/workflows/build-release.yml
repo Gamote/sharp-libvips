@@ -1,12 +1,11 @@
 name: Build Release
 on: [ push, pull_request, workflow_dispatch ]
+permissions: write-all
 jobs:
   create-release:
     runs-on: 'ubuntu-22.04'
     permissions:
-       # Need permission to write to the Releases tab now.
-       # https://github.com/ncipollo/release-action/issues/208.
-       contents: write
+      contents: write
     outputs:
       upload_url: ${{ steps.create-release.outputs.upload_url }}
     steps:
@@ -21,9 +20,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     permissions:
-       # Need permission to write to the Releases tab now.
-       # https://github.com/ncipollo/release-action/issues/208.
-       contents: write
+      contents: write
     needs: create-release
     strategy:
       fail-fast: false
