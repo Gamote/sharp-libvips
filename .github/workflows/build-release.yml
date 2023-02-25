@@ -4,8 +4,7 @@ permissions: write-all
 jobs:
   create-release:
     runs-on: 'ubuntu-22.04'
-    permissions:
-      contents: write
+    permissions: write-all
     outputs:
       upload_url: ${{ steps.create-release.outputs.upload_url }}
     steps:
@@ -19,8 +18,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
   build:
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: write
+    permissions: write-all
     needs: create-release
     strategy:
       fail-fast: false
